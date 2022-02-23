@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackBar = require('webpackbar')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const ArcoWebpackPlugin = require('@arco-design/webpack-plugin')
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin') // antd dayjs 替换 moment.js
 const paths = require('../paths')
 const { isDevelopment, isProduction } = require('../env')
 const { imageInlineSizeLimit } = require('../conf')
@@ -85,7 +85,10 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: isDevelopment
+              sourceMap: isDevelopment,
+              lessOptions: {
+                javascriptEnabled: true
+              }
             }
           }
         ]
@@ -106,7 +109,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ArcoWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: paths.appHtml,
       cache: true
@@ -134,6 +136,7 @@ module.exports = {
       typescript: {
         configFile: paths.appTsConfig
       }
-    })
+    }),
+    new AntdDayjsWebpackPlugin()
   ]
 }

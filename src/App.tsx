@@ -1,14 +1,17 @@
 import React, { useCallback } from 'react'
-import { ConfigProvider } from '@arco-design/web-react'
+import { ConfigProvider } from 'antd'
 import { Router, Route, Routes } from 'react-router-dom'
 import { Provider, observer } from 'mobx-react'
-import zhCN from '@arco-design/web-react/es/locale/zh-CN'
-import enUS from '@arco-design/web-react/es/locale/en-US'
+import zhCN from 'antd/lib/locale/zh_CN'
+import enUS from 'antd/lib/locale/en_US'
 import stores from './stores'
 import './App.less'
+import history from '../lib/history'
 
 const App = () => {
-  const getArcoLocale = useCallback((lang) => {
+  const { CommonStore } = stores
+
+  const getLocale = useCallback((lang) => {
     switch (lang) {
       case 'zh-CN':
         return zhCN
@@ -20,8 +23,8 @@ const App = () => {
   }, [])
 
   return (
-    <Router location='/' navigator={undefined}>
-      <ConfigProvider locale={getArcoLocale()}>
+    <Router location='/' navigator={history}>
+      <ConfigProvider locale={getLocale(CommonStore.language)}>
         <Provider {...stores}>
           <Routes>{}</Routes>
         </Provider>

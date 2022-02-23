@@ -1,24 +1,20 @@
 import { observable, action, makeObservable } from 'mobx'
 
-interface State {
-  [property: string]: any
-}
-
 class Store {
+  [property: string]: any
+
   constructor() {
     makeObservable(this)
   }
 
-  @observable value = 1;
+  @observable value = 1
 
-  [property: string]: any
-
-  @action setState(state: State): void {
-    for (const key in state) {
-      if (typeof key === 'string' && Object.hasOwnProperty.call(this, key)) {
-        this[key] = state[key]
+  @action setState(state: any): void {
+    for (const property in state) {
+      if (typeof property === 'string' && Object.hasOwnProperty.call(this, property)) {
+        this[property] = state[property]
       } else {
-        throw new Error(`state‘s key does not exist: ${key}`)
+        throw new Error(`state‘s property does not exist: ${property}`)
       }
     }
   }
