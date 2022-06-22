@@ -1,5 +1,7 @@
-import CommonStore from './commonStore'
+import CommonStore from './CommonStore'
+import UserStore from './UserStore'
 
 export default {
-  CommonStore
+  CommonStore,
+  UserStore
 }

@@ -7,7 +7,7 @@ class CommonStore {
     makeObservable(this)
   }
 
-  @observable language = 'zh-CN'
+  @observable baseInfo = {}
 
   @action
   setState(state: any): void {

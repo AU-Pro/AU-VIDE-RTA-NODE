@@ -34,9 +34,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "history": "^4.10.1",
-    "antd": "^4.13.0",
-    "antd-dayjs-webpack-plugin": "^1.0.6",
     "@babel/core": "^7.13.13",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-decorators": "^7.16.0",
@@ -51,6 +48,8 @@
     "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "antd": "^4.13.0",
+    "antd-dayjs-webpack-plugin": "^1.0.6",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
@@ -76,6 +75,7 @@
     "eslint-plugin-unicorn": "^29.0.0",
     "fork-ts-checker-webpack-plugin": "^6.2.0",
     "glob": "^7.2.0",
+    "history": "^4.10.1",
     "html-webpack-plugin": "^5.3.1",
     "husky": "7.0.4",
     "ip": "^1.1.5",
@@ -110,7 +110,10 @@
     "webpackbar": "^5.0.0-3"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/runtime-corejs3": "^7.13.10",
+    "@types/react-router": "^5.1.18",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

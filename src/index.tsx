@@ -1,9 +1,15 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import App from './App'
 
 const render = (Component: any) => {
-  ReactDOM.render(<Component />, document.querySelector('#app'))
+  ReactDOM.render(
+    <BrowserRouter>
+      <Component />
+    </BrowserRouter>,
+    document.querySelector('#app')
+  )
 }
 
 render(App)

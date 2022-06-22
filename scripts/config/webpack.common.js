@@ -7,6 +7,7 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin') // antd dayj
 const paths = require('../paths')
 const { isDevelopment, isProduction } = require('../env')
 const { imageInlineSizeLimit } = require('../conf')
+// const CustomDevPlugin = require('../lib/devPlugin')
 
 const getCssLoaders = (importLoaders) => [
   // 进行 css 样式拆分
@@ -109,6 +110,7 @@ module.exports = {
     ]
   },
   plugins: [
+    // new CustomDevPlugin(),
     new HtmlWebpackPlugin({
       template: paths.appHtml,
       cache: true
