@@ -13,7 +13,7 @@ class CustomDevPlugin {
       // 支持处理逻辑
       // 处理完毕后执行 callback 以通知 Webpack
       // 如果不执行 callback，运行流程将会一直卡在这不往下执行
-      console.log('<--------- AU-VIDE-RUN --------->')
+      console.log('<--------- AU-Demo-RUN --------->')
       // 修改或添加资源
       compilation.assets['new-file.js'] = {
         source() {

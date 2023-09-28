@@ -1,0 +1,125 @@
+.Pagination {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  z-index: 3;
+  display: flex;
+
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #f7f6f8;
+  border-radius: 40px;
+  box-shadow: 0 2px 24px rgba(200, 201, 204, 0.5);
+
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 12px;
+    color: #5c5962;
+    cursor: pointer;
+  }
+
+  .left {
+    padding: 0 10px 0 14px;
+  }
+
+  .left-hover {
+    border-right: 1px solid #f0eff2;
+  }
+
+  .right {
+    padding: 0 14px 0 10px;
+    border-left: 1px solid #f0eff2;
+  }
+
+  .disabled {
+    color: #5c596262;
+    cursor: auto;
+  }
+
+  .center {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 0;
+    overflow: hidden;
+    transform: scale(0);
+
+    transform-origin: right right;
+    transition: all 300ms ease-in-out;
+
+    .input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      color: #929098;
+      border: 1px solid transparent;
+      border-radius: 0;
+      box-shadow: none;
+
+      &:hover {
+        background-color: #f7f6f8;
+      }
+
+      :global {
+        .ant-input-number-input {
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          line-height: 38px;
+          text-align: center;
+          border: 1px solid transparent;
+          border-radius: 0;
+
+          &:focus {
+            border: 1px solid #7f5dff;
+          }
+        }
+      }
+    }
+
+    .divider,
+    .total {
+      color: #929098;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      text-align: center;
+    }
+
+    .divider {
+      width: 16px;
+    }
+
+    .total {
+      width: 40px;
+    }
+  }
+
+  .center-hover {
+    width: 96px;
+    transform: scale(1);
+  }
+}
+
+.Pagination-disabled {
+  // opacity: 0.5;
+  cursor: not-allowed;
+
+  .left,
+  .right,
+  .center {
+    pointer-events: none;
+  }
+}
+
+// .tooltip {
+//   :global {
+//   }
+// }

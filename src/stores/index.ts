@@ -1,4 +1,4 @@
-import CommonStore from './CommonStore'
+import CommonStore from './commonStore'
 import UserStore from './UserStore'
 
 export default {

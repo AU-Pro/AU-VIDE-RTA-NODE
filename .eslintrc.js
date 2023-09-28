@@ -30,7 +30,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.tsx', '.ts', '.js', '.json']
+        extensions: ['.tsx', '.ts', '.js', '.json', '.less']
       },
       typescript: {}
     }
@@ -51,7 +51,8 @@ module.exports = {
     'import/no-unresolved': ERROR,
     'import/no-dynamic-require': OFF,
     'react/no-array-index-key': OFF,
-
+    'react-hooks/exhaustive-deps': OFF,
+    'unicorn/consistent-function-scoping': OFF,
     'unicorn/better-regex': ERROR,
     'unicorn/prevent-abbreviations': OFF,
     'unicorn/filename-case': [

@@ -9,38 +9,50 @@ const { isDevelopment, isProduction } = require('../env')
 const { imageInlineSizeLimit } = require('../conf')
 // const CustomDevPlugin = require('../lib/devPlugin')
 
-const getCssLoaders = (importLoaders) => [
-  // 进行 css 样式拆分
-  isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-  {
-    loader: 'css-loader',
-    options: {
-      modules: false,
-      sourceMap: isDevelopment,
-      importLoaders
-    }
-  },
-  {
-    loader: 'postcss-loader',
-    options: {
-      postcssOptions: {
-        plugins: [
-          require('postcss-flexbugs-fixes'),
-          isProduction && [
-            'postcss-preset-env',
-            {
-              autoprefixer: {
-                grid: true,
-                flexbox: 'no-2009'
-              },
-              stage: 3
+const cssModules = () => {
+  const handler = isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader
+  return [
+    /** 处理第三方样式 */
+    {
+      test: /\.(css|less)$/,
+      exclude: /src/,
+      use: [
+        handler,
+        'css-loader',
+        {
+          loader: 'less-loader',
+          options: {
+            lessOptions: {
+              // modifyVars: {},
+              javascriptEnabled: true
             }
-          ]
-        ].filter(Boolean)
-      }
+          }
+        }
+      ]
+    },
+    /** 只处理模块化的样式文件 */
+    {
+      test: /\.(module\.)?less$/,
+      exclude: /node_modules/,
+      use: [
+        /** 创建style标签，添加到header  */
+        handler,
+        {
+          loader: 'css-loader' /** 解析合并所有css代码 */,
+          options: {
+            modules: {
+              mode: 'local',
+              localIdentName: '[local]--[hash:base64:8]'
+            }
+          }
+        },
+        'postcss-loader' /** 添加浏览器厂商前缀 */,
+        /** less 转化 css */
+        'less-loader'
+      ]
     }
-  }
-]
+  ]
+}
 
 module.exports = {
   entry: {
@@ -53,13 +65,16 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json'],
+    extensions: ['.tsx', '.ts', '.js', '.json', '.less'],
     alias: {
       Src: paths.appSrc,
       Components: paths.appSrcComponents,
       Pages: paths.appSrcPages,
       Styled: paths.appSrcStyled,
       Utils: paths.appSrcUtils
+    },
+    fallback: {
+      querystring: false
     }
   },
   externals: {
@@ -75,25 +90,7 @@ module.exports = {
         options: { cacheDirectory: true },
         exclude: /node_modules/
       },
-      {
-        test: /\.css$/,
-        use: getCssLoaders(1)
-      },
-      {
-        test: /\.less$/,
-        use: [
-          ...getCssLoaders(2),
-          {
-            loader: 'less-loader',
-            options: {
-              sourceMap: isDevelopment,
-              lessOptions: {
-                javascriptEnabled: true
-              }
-            }
-          }
-        ]
-      },
+      ...cssModules(),
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         type: 'asset',

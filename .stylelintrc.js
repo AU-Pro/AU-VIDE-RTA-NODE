@@ -12,7 +12,8 @@ module.exports = {
     'value-keyword-case': null,
     'rule-empty-line-before': ['always', { except: ['after-single-line-comment', 'first-nested'] }],
     'at-rule-no-unknown': null,
-    'scss/at-rule-no-unknown': true
+    'scss/at-rule-no-unknown': true,
+    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', ':global'] }]
   },
   ignoreFiles: ['node_modules/**/*', 'build/**/*', 'dist/**/*']
 }

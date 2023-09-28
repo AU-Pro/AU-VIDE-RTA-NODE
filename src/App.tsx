@@ -7,6 +7,7 @@ import { Locale } from 'antd/lib/locale-provider'
 import RenderRouter from './router/RenderRouter'
 import stores from './stores'
 import './App.less'
+import './mock'
 
 const App = () => {
   const { CommonStore } = stores
