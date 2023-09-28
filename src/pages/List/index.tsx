@@ -12,12 +12,12 @@ export const pageAliasConfig = {
 interface Response {
   result: any[]
   success: boolean
-  total: number
+  totalCount: number
 }
 
 const List = () => {
   const { data, pagination, run, refresh, loading } = usePagination(async ({ current, pageSize }) => {
-    const { result, success, total }: Response = await fetch('base/list', {
+    const { result, success, totalCount }: Response = await fetch('base/list', {
       method: 'post',
       body: JSON.stringify({
         pageNo: current,
@@ -26,7 +26,7 @@ const List = () => {
     }).then((res) => res.json())
 
     return success
-      ? { list: result, total, current, pageSize }
+      ? { list: result, total: totalCount, current, pageSize }
       : {
           list: [],
           total: 0,
@@ -69,7 +69,7 @@ const List = () => {
   ]
 
   const handlePageChange = useCallback(
-    (currentPage) => {
+    ({ currentPage }) => {
       pagination.onChange(currentPage, pagination.pageSize)
     },
     [pagination]
@@ -77,18 +77,20 @@ const List = () => {
 
   return (
     <div className={styles.List}>
-      <Table
-        pagination={false}
-        rowKey='id'
-        dataSource={data?.list}
-        columns={columns}
-        loading={loading}
-        scroll={{
-          scrollToFirstRowOnChange: true,
-          x: '100%',
-          y: 'calc(100% - 20px)'
-        }}
-      />
+      <div className={styles.Table}>
+        <Table
+          pagination={false}
+          rowKey='id'
+          dataSource={data?.list}
+          columns={columns}
+          loading={loading}
+          scroll={{
+            scrollToFirstRowOnChange: true,
+            x: '100%',
+            y: 'calc(100% - 20px)'
+          }}
+        />
+      </div>
       <Pagination pagination={pagination} alias={pageAliasConfig} onChange={handlePageChange} />
     </div>
   )
