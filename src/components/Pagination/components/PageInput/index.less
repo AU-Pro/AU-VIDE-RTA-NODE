@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 0;
+  overflow: hidden;
+  transform: scale(0);
+
+  transform-origin: right right;
+  transition: all 300ms ease-in-out;
+
+  .input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #929098;
+    border: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:hover {
+      background-color: #f7f6f8;
+    }
+
+    :global {
+      .ant-input-number-input {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        line-height: 38px;
+        text-align: center;
+        border: 1px solid transparent;
+        border-radius: 0;
+
+        &:focus {
+          border: 1px solid #7f5dff;
+        }
+      }
+    }
+  }
+
+  .divider,
+  .total {
+    color: #929098;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  .divider {
+    width: 16px;
+  }
+
+  .total {
+    width: 40px;
+  }
+}
+
+.hover {
+  width: 96px;
+  transform: scale(1);
+}

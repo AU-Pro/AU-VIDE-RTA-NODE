@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { usePagination } from 'ahooks'
 import { Table } from 'antd'
 import Pagination from 'Src/components/Pagination'
+import { columns, ResponseType } from './constants'
 import styles from './index.less'
 
 export const pageAliasConfig = {
@@ -9,15 +10,9 @@ export const pageAliasConfig = {
   totalCount: 'total'
 }
 
-interface Response {
-  result: any[]
-  success: boolean
-  totalCount: number
-}
-
 const List = () => {
   const { data, pagination, run, refresh, loading } = usePagination(async ({ current, pageSize }) => {
-    const { result, success, totalCount }: Response = await fetch('base/list', {
+    const { result, success, totalCount }: ResponseType = await fetch('base/list', {
       method: 'post',
       body: JSON.stringify({
         pageNo: current,
@@ -34,39 +29,6 @@ const List = () => {
           pageSize
         }
   }, {})
-
-  const columns = [
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      width: 160
-    },
-    {
-      title: '手机号',
-      dataIndex: 'mobile',
-      width: 200
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      width: 160
-    },
-    {
-      title: '性别',
-      dataIndex: 'gender',
-      width: 100
-    },
-    {
-      title: '身高(cm)',
-      dataIndex: 'height',
-      width: 100
-    },
-    {
-      title: '体重(kg)',
-      dataIndex: 'weight',
-      width: 100
-    }
-  ]
 
   const handlePageChange = useCallback(
     ({ currentPage }) => {

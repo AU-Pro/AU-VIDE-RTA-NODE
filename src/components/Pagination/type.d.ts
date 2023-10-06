@@ -21,7 +21,6 @@ export interface PaginationProps {
   className?: string
   alias?: AliasKeyType
   disabled?: boolean
-  style?: React.CSSProperties
   pagination: PaginationType
   onChange?: (paginationOnChangeProps: PaginationOnChangePropsType) => void
 }
@@ -48,3 +47,12 @@ export interface PaginationState {
 }
 
 export type PaginationAction = (preState: PaginationState, payload: Partial<PaginationState>) => PaginationState
+
+export interface PaginationContextType {
+  disabled: boolean
+  inputFocus: boolean
+  hoverStatus: boolean
+  paginationState: UsePaginationMethodsTypes
+  setInputFocus: (inputFocus: boolean) => void
+  setHoverStatus: (hoverStatus: boolean) => void
+}
