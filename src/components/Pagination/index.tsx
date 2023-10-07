@@ -6,15 +6,15 @@
  * @lastEditTime 2023-09-26
  * @description 提供 hooks 和组件两种方式使用, usePaginationMethods 为 hooks 方式使用
  */
-import React, { FC, useState, useCallback } from 'react'
+import React, { FC, useState, useCallback, useMemo } from 'react'
 import usePaginationMethods from './hooks/usePaginationMethods'
 import { Capsule, PageAdd, PageInput, PageSub } from './components'
-import type { PaginationProps } from './type.d'
+import type { PaginationType } from './type.d'
 import { PaginationContext } from './context'
 import styles from './index.less'
 
-const Pagination: FC<PaginationProps> = (props) => {
-  const { className = '', pagination, onChange, alias = {}, disabled = false } = props
+const Pagination: PaginationType = (props) => {
+  const { className = '', pagination, onChange, alias = {}, disabled = false, children } = props
 
   const paginationHooksData = usePaginationMethods({
     pagination,
@@ -42,17 +42,24 @@ const Pagination: FC<PaginationProps> = (props) => {
       }}
     >
       <div className={`${styles.Pagination} ${className}`}>
-        <Capsule>
-          <PageSub />
+        {children || (
+          <Capsule>
+            <PageSub />
 
-          <PageInput />
+            <PageInput />
 
-          <PageAdd />
-        </Capsule>
+            <PageAdd />
+          </Capsule>
+        )}
       </div>
     </PaginationContext.Provider>
   )
 }
+
+Pagination.Capsule = Capsule
+Pagination.PageAdd = PageAdd
+Pagination.PageSub = PageSub
+Pagination.PageInput = PageInput
 
 export default Pagination
 

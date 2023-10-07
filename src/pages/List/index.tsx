@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { usePagination } from 'ahooks'
 import { Table } from 'antd'
 import Pagination from 'Src/components/Pagination'
+import { ColumnWidthOutlined } from '@ant-design/icons'
 import { columns, ResponseType } from './constants'
 import styles from './index.less'
 
@@ -9,6 +10,8 @@ export const pageAliasConfig = {
   pageNo: 'current',
   totalCount: 'total'
 }
+
+const { Capsule, PageSub, PageInput, PageAdd } = Pagination
 
 const List = () => {
   const { data, pagination, run, refresh, loading } = usePagination(async ({ current, pageSize }) => {
@@ -53,7 +56,17 @@ const List = () => {
           }}
         />
       </div>
-      <Pagination pagination={pagination} alias={pageAliasConfig} onChange={handlePageChange} />
+      <Pagination pagination={pagination} alias={pageAliasConfig} onChange={handlePageChange}>
+        <Capsule>
+          <PageSub />
+
+          <ColumnWidthOutlined style={{ margin: '0px 12px', color: '#bfbfbf' }} />
+
+          <PageInput />
+
+          <PageAdd />
+        </Capsule>
+      </Pagination>
     </div>
   )
 }

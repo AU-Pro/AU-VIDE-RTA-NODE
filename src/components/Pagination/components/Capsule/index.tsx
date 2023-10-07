@@ -1,10 +1,7 @@
 import React, { useContext, useCallback, FC } from 'react'
 import { PaginationContext } from '../../context'
+import { CapsuleProps } from '../../type.d'
 import styles from './index.less'
-
-export interface CapsuleProps {
-  children: React.ReactNode
-}
 
 const Capsule: FC<CapsuleProps> = (props) => {
   const { children } = props

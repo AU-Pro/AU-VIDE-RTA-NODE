@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { DownOutlined } from '@ant-design/icons'
 import { PaginationContext } from '../../context'
+import { PageAddProps } from '../../type.d'
 import styles from './index.less'
 
-const PageAdd = () => {
+const PageAdd: FC<PageAddProps> = () => {
   const { paginationState } = useContext(PaginationContext)
   const { pagination, handlePageGo } = paginationState || {}
   const { pageNo, pageSize, totalCount } = pagination || {}

@@ -1,4 +1,5 @@
 #### 方式一：直接使用 <Pagination />
+
 ```ts
 import Pagination from 'src/@components/Pagination';
 
@@ -33,6 +34,7 @@ const Index: FC<IndexProps> = () => {
 ```
 
 #### 方式二：使用 hooks
+
 ```ts
 import {usePaginationMethods} from 'src/@components/Pagination';
 
@@ -75,3 +77,44 @@ const Index: FC<IndexProps> = (props) => {
 }
 ```
 
+#### 方式三：使用已封装的组件
+
+```ts
+import Pagination from 'src/@components/Pagination';
+import { ColumnWidthOutlined } from '@ant-design/icons'
+
+const {Capsule, PageAdd, PageSub, PageInput} = Pagination;
+
+const pageAliasConfig = {
+  pageNo: 'current',
+  totalCount: 'total'
+}
+
+const Index: FC<IndexProps> = (props) => {
+    const {pagination} = props;
+    ...
+    const handlePageChange = useCallback(
+      ({ currentPage }) => {
+        pagination.onChange(currentPage, pagination.pageSize)
+      },
+      [pagination]
+    )
+
+    ...
+
+    return (
+      <Pagination pagination={pagination} alias={pageAliasConfig} onChange={handlePageChange}>
+        <Capsule>
+          <PageSub />
+
+          {/* 任意组合进需要的 dom */}
+          <ColumnWidthOutlined style={{ margin: '0px 12px', color: '#bfbfbf' }} />
+
+          <PageInput />
+
+          <PageAdd />
+        </Capsule>
+      </Pagination>
+    );
+}
+```

@@ -5,8 +5,8 @@ const PaginationContextState: PaginationContextType = {
   disabled: true,
   inputFocus: false,
   hoverStatus: false,
-  setInputFocus: (inputFocus: boolean) => {},
-  setHoverStatus: (hoverStatus: boolean) => {},
+  setInputFocus: () => {},
+  setHoverStatus: () => {},
   paginationState: {
     pagination: {
       pageNo: 1,

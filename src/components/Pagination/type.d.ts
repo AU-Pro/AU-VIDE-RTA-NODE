@@ -1,5 +1,19 @@
 import React from 'react'
 
+export type CapsuleProps = {
+  children: React.ReactNode
+}
+export type PageAddProps = Record<string, never>
+export type PageSubProps = Record<string, never>
+export type PageInputProps = Record<string, never>
+
+export type PaginationType = React.FC<PaginationProps> & {
+  Capsule: React.FC<CapsuleProps>
+  PageAdd: React.FC<PageAddProps>
+  PageSub: React.FC<PageSubProps>
+  PageInput: React.FC<PageInputProps>
+}
+
 export type AliasKeyType = {
   pageNo?: string
   pageSize?: string
@@ -10,7 +24,7 @@ export type PaginationOnChangePropsType = {
   currentPage: number
 }
 
-export type PaginationType = {
+export type PaginationDataType = {
   pageNo?: number
   pageSize?: number
   totalCount?: number
@@ -21,12 +35,12 @@ export interface PaginationProps {
   className?: string
   alias?: AliasKeyType
   disabled?: boolean
-  pagination: PaginationType
+  pagination: PaginationDataType
   onChange?: (paginationOnChangeProps: PaginationOnChangePropsType) => void
 }
 
 export type UsePaginationMethodsTypes = {
-  pagination: Required<PaginationType>
+  pagination: Required<PaginationDataType>
   maxPageNo: number
   inputValue: number
   handlePageGo: (value?: number) => void
@@ -35,13 +49,13 @@ export type UsePaginationMethodsTypes = {
 }
 
 export interface UsePaginationMethodsProps {
-  pagination: PaginationType
+  pagination: PaginationDataType
   alias?: AliasKeyType
   onChange?: (paginationOnChangeProps: PaginationOnChangePropsType) => void
 }
 
 export interface PaginationState {
-  pagination: PaginationType
+  pagination: PaginationDataType
   inputValue: number
   maxPageNo: number
 }

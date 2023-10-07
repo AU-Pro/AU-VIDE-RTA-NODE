@@ -1,10 +1,11 @@
-import React, { useContext, useCallback, useState } from 'react'
+import React, { useContext, useCallback, useState, FC } from 'react'
 import { useDebounceFn } from 'ahooks'
 import { InputNumber, Tooltip } from 'antd'
 import { PaginationContext } from '../../context'
+import { PageInputProps } from '../../type.d'
 import styles from './index.less'
 
-const PageInput = () => {
+const PageInput: FC<PageInputProps> = () => {
   const { hoverStatus, paginationState, setInputFocus } = useContext(PaginationContext)
   const { inputValue, maxPageNo, handlePageChange, pagination } = paginationState
 

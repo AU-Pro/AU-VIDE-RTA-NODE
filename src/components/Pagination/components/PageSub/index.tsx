@@ -1,9 +1,11 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import { UpOutlined } from '@ant-design/icons'
 import { PaginationContext } from '../../context'
+import { PageSubProps } from '../../type.d'
+
 import styles from './index.less'
 
-const PageSub = () => {
+const PageSub: FC<PageSubProps> = () => {
   const { hoverStatus, paginationState } = useContext(PaginationContext)
   const { pagination, handlePageBack } = paginationState || {}
 
