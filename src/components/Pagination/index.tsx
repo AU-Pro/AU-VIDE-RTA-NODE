@@ -16,6 +16,9 @@ import styles from './index.less'
 const Pagination: PaginationType = (props) => {
   const { className = '', pagination, onChange, alias = {}, disabled = false, children } = props
 
+  const [inputFocus, setInputFocus] = useState(false)
+  const [hoverStatus, setHoverStatus] = useState(false)
+
   const paginationHooksData = usePaginationMethods({
     pagination,
     onChange,
@@ -24,9 +27,6 @@ const Pagination: PaginationType = (props) => {
   const {
     pagination: { pageNo, pageSize, totalCount }
   } = paginationHooksData
-
-  const [inputFocus, setInputFocus] = useState(false)
-  const [hoverStatus, setHoverStatus] = useState(false)
 
   return (
     <PaginationContext.Provider
