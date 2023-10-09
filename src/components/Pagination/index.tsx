@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /**
  * @name Pagination 分页组件
  * @author AUPro
@@ -6,7 +7,7 @@
  * @lastEditTime 2023-09-26
  * @description 提供 hooks 和组件两种方式使用, usePaginationMethods 为 hooks 方式使用
  */
-import React, { FC, useState, useCallback, useMemo } from 'react'
+import React, { useMemo, useReducer, useState } from 'react'
 import usePaginationMethods from './hooks/usePaginationMethods'
 import { Capsule, PageAdd, PageInput, PageSub } from './components'
 import type { PaginationType } from './type.d'
@@ -24,14 +25,17 @@ const Pagination: PaginationType = (props) => {
     onChange,
     alias
   })
+
   const {
-    pagination: { pageNo, pageSize, totalCount }
+    pagination: { pageNo, totalCount } // pageSize
   } = paginationHooksData
+
+  const disabledCount = useMemo(() => disabled || !totalCount || pageNo <= 1, [disabled, paginationHooksData])
 
   return (
     <PaginationContext.Provider
       value={{
-        disabled: disabled || !totalCount || pageNo <= 1,
+        disabled: disabledCount,
         inputFocus,
         hoverStatus,
         setInputFocus,
